@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+header {
+    height: 150px;
+    background-color: black;
+}
+footer {
+    height: 45px;
+    background-color: black;
+    text-align: center;
+}
+main {
+    flex-grow: 4;
+    background-color: teal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    color: white;
+    text-align: center;
+}
+h3 {
+    color: white;
+}
+.tile {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+}
+#tic-tac-toe-grid {
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

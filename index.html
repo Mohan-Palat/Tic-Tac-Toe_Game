@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Tic Tac Toe Mania!</h1>
+    </header>
+    <main>
+        <p>Main Section</p>
+        <div id="tic-tac-toe-grid">
+            <div class="row row-1">
+                <div class="tile one" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+            </div>
+            <div class="row row-2">
+                <div class="tile" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+            </div>
+            <div class="row row-3">
+                <div class="tile" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+                <div class="tile" data-clicked="false"></div>
+            </div>
+        </div>
+        <button id="new-game-btn"> New Game! </button>
+    </main>
+    <footer>
+        <h3> Footer Section</h3>
+    </footer>
     <script src="js/main.js"></script>
 </body>
 </html>
