@@ -185,7 +185,7 @@ function updatePlayerCounts(coordinates){
     if(hasWon){
         //display that the current player has won on the message board
         displayMessage(`${currentPlayer.name} has won!`);
-
+        console.log(currentPlayer);
         //set currentPlayer to null so that no moves can be made past this point
         currentPlayer = null;
     }
@@ -227,7 +227,39 @@ function updatePlayerCounts(coordinates){
  * -clear player counts
  */
 
+ function newGame(){
+    //remove the background images from all tiles
+    let tiles = document.querySelectorAll('.tile');
+    tiles.forEach((tile) => {
+        tile.style.backgroundImage = "";
+    });
+
+    //reset player counts to 0, to start the game from scratch
+    clearPlayerCounts();
+ }
+
+ //add event listener to button
+ let newGameBtn = document.querySelector('#new-game-btn');
+ newGameBtn.addEventListener('click', newGame);
+
  /**
   * Clear Player counts
   * -when a game resets, I need to reset their row/col/diag counts to 0
   */
+ function clearPlayerCounts(){
+     let players = [player1, player2];
+     players.forEach((player) => {
+         player.row1 = 0;
+         player.row2 = 0;
+         player.row3 = 0;
+
+         player.col1 = 0;
+         player.col2 = 0;
+         player.col3 = 0;
+
+         player.diag1 = 0;
+         player.diag2 = 0;
+
+         console.log(player);
+     })
+ }
