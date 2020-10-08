@@ -61,14 +61,13 @@ console.log('script connected!')
  * -update player object with row/col/diag counts ==> call a function
  * -call validation function to see if 3 in a row was met ==> call a function
  * -change global variable currentTurn to other player ==> call a function
- * -change message on display board ==> call a function
  */
 
  function tileClick(event){
     let tile = event.target;
-    if(tile.dataset.clicked !== true){
+    if(tile.dataset.clicked !== "true"){
         //update clicked property to true
-        tile.dataset.clicked = true;
+        tile.dataset.clicked = "true";
 
         //update background of the tile clicked
         tile.style.backgroundImage = `url(${currentPlayer.token})`;
@@ -82,50 +81,30 @@ console.log('script connected!')
             col: tile.dataset.col
         };
         updatePlayerCounts(coordinates);
-        console.log(currentPlayer);
+
+        //validate to see if anyone has won yet, or if there are ties
+        validate();
+
 
     }
     
  }
 
+ //add event listener for each tile
  let tiles = document.querySelectorAll('.tile');
  tiles.forEach((tile) => {
      tile.addEventListener('click', tileClick);
- })
+ });
 
-/**
- * Switch turn
- * - this function will switch the player who's turn it is
- */
-
-
-/**
- * Validation method:
- * -this method will check if the player has played 3 in a row
- * if 3 in a row is not met then:
- * -call a function to see if the game is a tie ==> call a function
- */
-
-/**
- * Display Board Updates:
- * -this method will display the winner/who's turn it is/tie  
- */
-
-/**
- * New Game
- * -this method will reset the board for a new game
- */
-
-/**
+ /**
  * Update Player Counts:
  * -every time a player clicks on a tile it needs to be recorded in someway
  * -@ANGELINE you need to properly explain how this works
  */
 
- function updatePlayerCounts(coordinates){
+function updatePlayerCounts(coordinates){
     let row = parseInt(coordinates.row);
     let col = parseInt(coordinates.col);
-    console.log(typeof(row))
 
     //check rows
     if(row ===1){
@@ -161,6 +140,76 @@ console.log('script connected!')
     }
  }
 
+ /**
+ * Validation method:
+ * -this method will check if the player has played 3 in a row
+ * if 3 in a row is not met then:
+ * -see if the game is a tie 
+ * -change message on display board (according to the scenario) ==> call a function
+ */
+
+ function validate(){
+    let hasWon = false;
+    if(currentPlayer.row1 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.row2 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.row3 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.col1 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.col2 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.col3 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.diag1 === 3){
+        hasWon = true;
+    }
+    else if(currentPlayer.diag2 === 3){
+        hasWon = true;
+    }
+
+    //based off of the validation above, display the right message
+    if(hasWon){
+        //display that the current player has won on the message board
+        displayMessage(`${currentPlayer.name} has won!`);
+    }
+    else if(hasWon === false && totalMoves === 9){
+        //display that the game was a tie
+        displayMessage("There has been a tie!");
+    }
+ }
+/**
+ * Switch turn
+ * - this function will switch the player who's turn it is
+ */
+
+
+
+
+/**
+ * Display Board Updates:
+ * -this method will display the winner/who's turn it is/tie  
+ */
+ function displayMessage(string){
+     let messageBoard = document.querySelector('main p');
+     messageBoard.innerText = string;
+ }
+
+/**
+ * New Game
+ * -this method will reset the board for a new game
+ * -clear player counts
+ */
+
+
+
 
 /**
  * Tie checker
@@ -168,3 +217,8 @@ console.log('script connected!')
  * -if yes, then a tie has occured, change message board, set currentPlayer = null
  * -if no, do nothing
  */
+
+ /**
+  * Clear Player counts
+  * -when a game resets, I need to reset their row/col/diag counts to 0
+  */
