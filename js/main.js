@@ -2,9 +2,12 @@ console.log('script connected!')
 /**
  * Global Variables
  * -currentTurn: will point to the player who's turn it is
+ * -totalMoves: integer -> will keep track of total moves on the board
+ * will help determine if a tie has occured
  */
 
  let currentPlayer = null;
+ let totalMoves = 0;
 
 
 /**
@@ -42,7 +45,7 @@ console.log('script connected!')
     let player1 = new Player('Angeline', 'images/x.png');
     let player2 = new Player('Jacob', 'images/o.png');
 
-    currentPlayer = player2;
+    currentPlayer = player1;
  }
 
  document.addEventListener('DOMContentLoaded', init);
@@ -54,6 +57,7 @@ console.log('script connected!')
  * if not previously clicked:
  * -the data-clicked property will be set to true
  * -the background will change to the players token
+ * -add 1 to totalMoves global variable (used to help us determine a tie)
  * -update player object with row/col/diag counts ==> call a function
  * -call validation function to see if 3 in a row was met ==> call a function
  * -change global variable currentTurn to other player ==> call a function
@@ -63,8 +67,23 @@ console.log('script connected!')
  function tileClick(event){
     let tile = event.target;
     if(tile.dataset.clicked !== true){
+        //update clicked property to true
         tile.dataset.clicked = true;
+
+        //update background of the tile clicked
         tile.style.backgroundImage = `url(${currentPlayer.token})`;
+
+        //increment total moves
+        totalMoves++;
+
+        //add counts to player
+        let coordinates = {
+            row: tile.dataset.row,
+            col: tile.dataset.col
+        };
+        updatePlayerCounts(coordinates);
+        console.log(currentPlayer);
+
     }
     
  }
@@ -83,6 +102,8 @@ console.log('script connected!')
 /**
  * Validation method:
  * -this method will check if the player has played 3 in a row
+ * if 3 in a row is not met then:
+ * -call a function to see if the game is a tie ==> call a function
  */
 
 /**
@@ -93,4 +114,57 @@ console.log('script connected!')
 /**
  * New Game
  * -this method will reset the board for a new game
+ */
+
+/**
+ * Update Player Counts:
+ * -every time a player clicks on a tile it needs to be recorded in someway
+ * -@ANGELINE you need to properly explain how this works
+ */
+
+ function updatePlayerCounts(coordinates){
+    let row = parseInt(coordinates.row);
+    let col = parseInt(coordinates.col);
+    console.log(typeof(row))
+
+    //check rows
+    if(row ===1){
+        currentPlayer.row1++;
+    }
+    else if(row === 2){
+        currentPlayer.row2++;
+    }
+    else {
+        currentPlayer.row3++;
+    }
+    
+     //check columns
+    if(col ===1){
+        currentPlayer.col1++;
+    }
+    else if(col === 2){
+        currentPlayer.col2++;
+    }
+    else {
+        currentPlayer.col3++;
+    }
+
+    //check diagonal
+    //{1,1} {2,2} {3,3} = diag1
+    if(row === col){
+        currentPlayer.diag1++;
+    }
+
+    //{3,1} {2,2} {1,3} = diag2
+    if((row === 3 && col === 1) || (row === 2 && col === 2) || (row === 1 && col === 3)){
+        currentPlayer.diag2++;
+    }
+ }
+
+
+/**
+ * Tie checker
+ * -check if 9 moves have been played
+ * -if yes, then a tie has occured, change message board, set currentPlayer = null
+ * -if no, do nothing
  */
