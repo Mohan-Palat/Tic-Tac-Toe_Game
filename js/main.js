@@ -4,6 +4,7 @@ console.log('script connected!')
  * -currentTurn: will point to the player who's turn it is
  */
 
+ let currentPlayer = null;
 
 
 /**
@@ -13,6 +14,38 @@ console.log('script connected!')
  * -token url (either x or o)
  * -row, column, and diagonal count?
  */
+
+ class Player {
+     constructor(name, token){
+         this.name = name;
+         this.token = token;
+         this.row1 = 0;
+         this.row2 = 0;
+         this.row3 = 0;
+         this.col1 = 0;
+         this.col2 = 0;
+         this.col3 = 0;
+         this.diag1 = 0;
+         this.diag2 = 0;
+     }
+ }
+
+ /**
+  * Init Function
+  * -will create the first two players
+  * -will set the current player to player 1
+  * -this function will probably change, once I include a feature to enter player's names
+  * 
+  */
+
+ function init(){
+    let player1 = new Player('Angeline', 'images/x.png');
+    let player2 = new Player('Jacob', 'images/o.png');
+
+    currentPlayer = player2;
+ }
+
+ document.addEventListener('DOMContentLoaded', init);
 
 /**
  * Event listener
@@ -24,7 +57,22 @@ console.log('script connected!')
  * -update player object with row/col/diag counts ==> call a function
  * -call validation function to see if 3 in a row was met ==> call a function
  * -change global variable currentTurn to other player ==> call a function
+ * -change message on display board ==> call a function
  */
+
+ function tileClick(event){
+    let tile = event.target;
+    if(tile.dataset.clicked !== true){
+        tile.dataset.clicked = true;
+        tile.style.backgroundImage = `url(${currentPlayer.token})`;
+    }
+    
+ }
+
+ let tiles = document.querySelectorAll('.tile');
+ tiles.forEach((tile) => {
+     tile.addEventListener('click', tileClick);
+ })
 
 /**
  * Switch turn
@@ -38,15 +86,11 @@ console.log('script connected!')
  */
 
 /**
- * Display Updates:
+ * Display Board Updates:
  * -this method will display the winner/who's turn it is/tie  
  */
-//add event listener for every tile clicked
-document.querySelector('.one').addEventListener('click', (event) => {
-    let tile = event.target;
-    console.log(tile.dataset.clicked);
-    tile.dataset.clicked = true;
-    console.log(tile.dataset.clicked);
-    console.log(tile.style);
-    tile.style.backgroundImage = "url('images/x.png')";
-})
+
+/**
+ * New Game
+ * -this method will reset the board for a new game
+ */
