@@ -4,7 +4,7 @@ console.log('script connected!')
  * Attributes:
  * -name
  * -token url (either x or o)
- * -row, column, and diagonal count?
+ * -row, column, and diagonal counts
  */
 
 class Player {
@@ -112,7 +112,12 @@ class Player {
  /**
  * Update Player Counts:
  * -every time a player clicks on a tile it needs to be recorded in someway
- * -@ANGELINE you need to properly explain how this works
+ * -a person wins tic tac toe if they have 3 consecutive tokens in any row, column,
+ * or diagonal. Each tile on the board has a coordinate (row, column). Each time
+ * a player clicks a tile, this coordinate is recorded in the player object. The player
+ * object keeps a count of how many tokens were placed on each row/column/diagonal
+ * Once one of these counts reaches 3, the game is over. This method adds to the count of the 
+ * respective row/column/diagonal
  */
 
 function updatePlayerCounts(coordinates){
@@ -155,7 +160,7 @@ function updatePlayerCounts(coordinates){
 
  /**
  * Validation method:
- * -this method will check if the player has played 3 in a row
+ * -this method will check if the player has played 3 in a row by checking the counts on the player object
  * if 3 in a row is not met then:
  * -see if the game is a tie 
  * -change message on display board (according to the scenario) ==> call a function
@@ -193,17 +198,21 @@ function updatePlayerCounts(coordinates){
         //display that the current player has won on the message board
         displayMessage(`${currentPlayer.name} has won! Sorry ${otherPlayer.name}, better luck next time!`);
         console.log(currentPlayer);
-        //set currentPlayer to null so that no moves can be made past this point
+
+        //set currentPlayer to null so that the calling function will know that the game is over
         currentPlayer = null;
     }
     else if(hasWon === false && totalMoves === 9){
         //display that the game was a tie
         displayMessage("There has been a tie!");
 
-        //set currentPlayer to null so that no moves can be made past this point
+        //set currentPlayer to null so that the calling function will know that the game is over
         currentPlayer = null;
     }
+
+    //if no one won the game, and if there is no tie, then the game is still in play
  }
+
 /**
  * Switch turn
  * - this function will switch the player who's turn it is
@@ -218,8 +227,6 @@ function updatePlayerCounts(coordinates){
         otherPlayer = player2;
      }
  }
-
-
 
 /**
  * Display Board Updates:
