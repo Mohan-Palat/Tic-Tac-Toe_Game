@@ -1,5 +1,28 @@
 console.log('script connected!')
 /**
+ * Need a Player class
+ * Attributes:
+ * -name
+ * -token url (either x or o)
+ * -row, column, and diagonal count?
+ */
+
+class Player {
+    constructor(name, token){
+        this.name = name;
+        this.token = token;
+        this.row1 = 0;
+        this.row2 = 0;
+        this.row3 = 0;
+        this.col1 = 0;
+        this.col2 = 0;
+        this.col3 = 0;
+        this.diag1 = 0;
+        this.diag2 = 0;
+    }
+}
+
+/**
  * Global Variables
  * -currentTurn: will point to the player who's turn it is
  * -totalMoves: integer -> will keep track of total moves on the board
@@ -8,30 +31,8 @@ console.log('script connected!')
 
  let currentPlayer = null;
  let totalMoves = 0;
-
-
-/**
- * Need a Player class
- * Attributes:
- * -name
- * -token url (either x or o)
- * -row, column, and diagonal count?
- */
-
- class Player {
-     constructor(name, token){
-         this.name = name;
-         this.token = token;
-         this.row1 = 0;
-         this.row2 = 0;
-         this.row3 = 0;
-         this.col1 = 0;
-         this.col2 = 0;
-         this.col3 = 0;
-         this.diag1 = 0;
-         this.diag2 = 0;
-     }
- }
+ let player1 = new Player('Angeline', 'images/x.png');
+ let player2 = new Player('Jacob', 'images/o.png');
 
  /**
   * Init Function
@@ -42,10 +43,8 @@ console.log('script connected!')
   */
 
  function init(){
-    let player1 = new Player('Angeline', 'images/x.png');
-    let player2 = new Player('Jacob', 'images/o.png');
-
     currentPlayer = player1;
+    displayMessage(`${currentPlayer.name} you're up!`)
  }
 
  document.addEventListener('DOMContentLoaded', init);
@@ -85,7 +84,14 @@ console.log('script connected!')
         //validate to see if anyone has won yet, or if there are ties
         validate();
 
-
+        //if anyone won the game or if there was a tie, currentPlayer would be set to null (in the validation function)
+        //and the game would be over
+        //this conditional runs if the game is still in play
+        if(currentPlayer !== null){
+            //switch current player
+            switchPlayer();
+            displayMessage(`It's ${currentPlayer.name}'s turn!`);
+        }
     }
     
  }
@@ -179,10 +185,16 @@ function updatePlayerCounts(coordinates){
     if(hasWon){
         //display that the current player has won on the message board
         displayMessage(`${currentPlayer.name} has won!`);
+
+        //set currentPlayer to null so that no moves can be made past this point
+        currentPlayer = null;
     }
     else if(hasWon === false && totalMoves === 9){
         //display that the game was a tie
         displayMessage("There has been a tie!");
+
+        //set currentPlayer to null so that no moves can be made past this point
+        currentPlayer = null;
     }
  }
 /**
@@ -190,6 +202,13 @@ function updatePlayerCounts(coordinates){
  * - this function will switch the player who's turn it is
  */
 
+ function switchPlayer(){
+     if(currentPlayer === player1){
+         currentPlayer = player2;
+     }else {
+        currentPlayer = player1;
+     }
+ }
 
 
 
@@ -206,16 +225,6 @@ function updatePlayerCounts(coordinates){
  * New Game
  * -this method will reset the board for a new game
  * -clear player counts
- */
-
-
-
-
-/**
- * Tie checker
- * -check if 9 moves have been played
- * -if yes, then a tie has occured, change message board, set currentPlayer = null
- * -if no, do nothing
  */
 
  /**
