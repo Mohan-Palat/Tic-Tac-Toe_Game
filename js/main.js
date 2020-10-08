@@ -30,6 +30,7 @@ class Player {
  */
 
  let currentPlayer = null;
+ let otherPlayer = null;
  let totalMoves = 0;
  let player1 = new Player('Angeline', 'images/x.png');
  let player2 = new Player('Jacob', 'images/o.png');
@@ -44,6 +45,7 @@ class Player {
 
  function init(){
     currentPlayer = player1;
+    otherPlayer = player2;
     displayMessage(`${currentPlayer.name} you're up!`)
  }
 
@@ -88,9 +90,14 @@ class Player {
         //and the game would be over
         //this conditional runs if the game is still in play
         if(currentPlayer !== null){
-            //switch current player
+            //switch current player since the game is still in motion
             switchPlayer();
             displayMessage(`It's ${currentPlayer.name}'s turn!`);
+        }
+        else {
+            //mark all tiles with clicked = "true" so that no more moves
+            //can be made on the board, since the game has ended
+            setAllTilesToClicked();
         }
     }
     
@@ -184,7 +191,7 @@ function updatePlayerCounts(coordinates){
     //based off of the validation above, display the right message
     if(hasWon){
         //display that the current player has won on the message board
-        displayMessage(`${currentPlayer.name} has won!`);
+        displayMessage(`${currentPlayer.name} has won! Sorry ${otherPlayer.name}, better luck next time!`);
         console.log(currentPlayer);
         //set currentPlayer to null so that no moves can be made past this point
         currentPlayer = null;
@@ -205,8 +212,10 @@ function updatePlayerCounts(coordinates){
  function switchPlayer(){
      if(currentPlayer === player1){
          currentPlayer = player2;
+         otherPlayer = player1;
      }else {
         currentPlayer = player1;
+        otherPlayer = player2;
      }
  }
 
@@ -242,11 +251,12 @@ function updatePlayerCounts(coordinates){
     //reset totalMoves
     totalMoves = 0;
 
-    //reset currentPlayer
+    //reset currentPlayer & other player
     currentPlayer = player1;
+    otherPlayer = player2;
 
     //update display message
-    displayMessage(`${currentPlayer.name} you're up!`)
+    displayMessage(`${currentPlayer.name} you're up!`);
 
  }
 
@@ -274,4 +284,17 @@ function updatePlayerCounts(coordinates){
 
          console.log(player);
      })
+ }
+ 
+ /**
+  * Set All Tiles to clicked
+  * -once the game has tied/ended I will set all tiles to a value of clicked = true
+  * so that no more moves can be made on the board
+  */
+
+ function setAllTilesToClicked(){
+    let tiles = document.querySelectorAll('.tile');
+    tiles.forEach((tile) => {
+        tile.dataset.clicked = "true";
+    });
  }
