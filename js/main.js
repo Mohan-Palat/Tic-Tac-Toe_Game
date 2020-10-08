@@ -225,6 +225,7 @@ function updatePlayerCounts(coordinates){
  * New Game
  * -this method will reset the board for a new game
  * -clear player counts
+ * -set totalMoves back to 0
  */
 
  function newGame(){
@@ -232,10 +233,21 @@ function updatePlayerCounts(coordinates){
     let tiles = document.querySelectorAll('.tile');
     tiles.forEach((tile) => {
         tile.style.backgroundImage = "";
+        tile.dataset.clicked = "false";
     });
 
     //reset player counts to 0, to start the game from scratch
     clearPlayerCounts();
+
+    //reset totalMoves
+    totalMoves = 0;
+
+    //reset currentPlayer
+    currentPlayer = player1;
+
+    //update display message
+    displayMessage(`${currentPlayer.name} you're up!`)
+
  }
 
  //add event listener to button
