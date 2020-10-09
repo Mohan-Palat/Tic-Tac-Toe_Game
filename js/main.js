@@ -32,8 +32,8 @@ class Player {
  let currentPlayer = null;
  let otherPlayer = null;
  let totalMoves = 0;
- let player1 = new Player('Angeline', 'images/x.png');
- let player2 = new Player('Jacob', 'images/o.png');
+ let player1 = new Player('Rachel', 'images/hamburger.png');
+ let player2 = new Player('Angeline', 'images/upside-down-face.png');
 
  /**
   * Init Function
@@ -305,3 +305,6 @@ function updatePlayerCounts(coordinates){
         tile.dataset.clicked = "true";
     });
  }
+
+ // ===================================================================
+ 

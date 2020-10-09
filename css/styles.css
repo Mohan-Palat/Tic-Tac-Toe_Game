@@ -1,3 +1,7 @@
+html{
+    width: 100vw;
+    height: 100vh;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -12,9 +16,51 @@ footer {
     text-align: center;
 }
 main {
-    flex-grow: 4;
-    background-color: teal;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url('https://cutewallpaper.org/21/wooden-background-hd/Light-Wood-Wallpapers-HD-PixelsTalk.Net.jpg');
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+#welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#player-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    margin: 35px auto;
+
+}
+#player1, #player2 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+.blurred-box {
+    height: 250px;
+    width: 200px;
+    /* background: inherit; */
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, .10); 
+    backdrop-filter: blur(5px);
+}
+
+#game-page {
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -42,4 +88,16 @@ h3 {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+input {
+    padding: 7px;
+    border-radius: 2px;
+    border-color: inherit;
+}
+select {
+    padding: 7px;
+}
+label {
+    color:black;
+    text-align: center;
 }

@@ -11,25 +11,60 @@
         <h1>Tic Tac Toe Mania!</h1>
     </header>
     <main>
-        <p>Main Section</p>
-        <div id="tic-tac-toe-grid">
-            <div class="row row-1">
-                <div class="tile" data-clicked="false" data-row="1" data-col="1"></div>
-                <div class="tile" data-clicked="false" data-row="1" data-col="2"></div>
-                <div class="tile" data-clicked="false" data-row="1" data-col="3"></div>
+        <!-- WELCOME PAGE -->
+        <div id="welcome-page">
+            <div id="player-form">
+                <div id="player1" class="blurred-box">
+                    <label for="player1">Player 1:</label>
+                    <input type="text" id="p1_name" placeholder="Please enter your name"></input>
+                    <label for="p1_options">Choose your icon!</label>
+                    <select name="p1_options">
+                        <option data-url="images/x.png">X</option>
+                        <option data-url="images/o.png">O</option>
+                        <option data-url="images/star.png">⭐</option>
+                        <option data-url="images/cow.png">🐮</option>
+                        <option data-url="images/hamburger.png">🍔</option>
+                        <option data-url="images/upside-down-face.png">🙃</option>
+                    </select>
+                </div>
+                <div id="player2" class="blurred-box">
+                    <label for="player2">Player 2:</label>
+                    <input type="text" id="p2_name" placeholder="Please enter your name"></input>
+                    <label for="p2_options">Choose your icon!</label>
+                    <select name="p2_options">
+                        <option data-url="images/x.png">X</option>
+                        <option data-url="images/o.png">O</option>
+                        <option data-url="images/star.png">⭐</option>
+                        <option data-url="images/cow.png">🐮</option>
+                        <option data-url="images/hamburger.png">🍔</option>
+                        <option data-url="images/upside-down-face.png">🙃</option>
+                    </select>
+                </div>
             </div>
-            <div class="row row-2">
-                <div class="tile" data-clicked="false" data-row="2" data-col="1"></div>
-                <div class="tile" data-clicked="false" data-row="2" data-col="2"></div>
-                <div class="tile" data-clicked="false" data-row="2" data-col="3"></div>
-            </div>
-            <div class="row row-3">
-                <div class="tile" data-clicked="false" data-row="3" data-col="1"></div>
-                <div class="tile" data-clicked="false" data-row="3" data-col="2"></div>
-                <div class="tile" data-clicked="false" data-row="3" data-col="3"></div>
-            </div>
+            <button>Start Game!</button> 
         </div>
-        <button id="new-game-btn"> New Game! </button>
+        <!-- GAME PAGE -->
+        <div id="game-page">
+            <p>Main Section</p>
+            <div id="tic-tac-toe-grid">
+                <div class="row row-1">
+                    <div class="tile" data-clicked="false" data-row="1" data-col="1"></div>
+                    <div class="tile" data-clicked="false" data-row="1" data-col="2"></div>
+                    <div class="tile" data-clicked="false" data-row="1" data-col="3"></div>
+                </div>
+                <div class="row row-2">
+                    <div class="tile" data-clicked="false" data-row="2" data-col="1"></div>
+                    <div class="tile" data-clicked="false" data-row="2" data-col="2"></div>
+                    <div class="tile" data-clicked="false" data-row="2" data-col="3"></div>
+                </div>
+                <div class="row row-3">
+                    <div class="tile" data-clicked="false" data-row="3" data-col="1"></div>
+                    <div class="tile" data-clicked="false" data-row="3" data-col="2"></div>
+                    <div class="tile" data-clicked="false" data-row="3" data-col="3"></div>
+                </div>
+            </div>
+            <button id="new-game-btn"> New Game! </button>
+        </div>
     </main>
     <footer>
         <h3> Footer Section</h3>
