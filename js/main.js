@@ -19,6 +19,7 @@ class Player {
         this.col3 = 0;
         this.diag1 = 0;
         this.diag2 = 0;
+        this.wins = 0;
     }
 }
 
@@ -36,8 +37,6 @@ class Player {
  let player2 = null;
 
  //to keep track of multiple rounds
- let p1_tally = 0;
- let p2_tally = 0;
  let ties = 0;
 
 
@@ -52,7 +51,7 @@ class Player {
  function init(){
     currentPlayer = player1;
     otherPlayer = player2;
-    displayMessage(`${currentPlayer.name} you're up!`)
+    displayMessage(`${currentPlayer.name} you're up!`);
  }
 
 //  document.addEventListener('DOMContentLoaded', init);
@@ -104,9 +103,6 @@ class Player {
             //mark all tiles with clicked = "true" so that no more moves
             //can be made on the board, since the game has ended
             setAllTilesToClicked();
-
-            //update tally on screen
-
         }
     }
     
@@ -206,7 +202,10 @@ function updatePlayerCounts(coordinates){
     if(hasWon){
         //display that the current player has won on the message board
         displayMessage(`${currentPlayer.name} has won! Sorry ${otherPlayer.name}, better luck next time!`);
-        console.log(currentPlayer);
+        
+        //update number of wins for current player and display on screen
+        currentPlayer.wins++;
+        displayPlayerTally();
 
         //set currentPlayer to null so that the calling function will know that the game is over
         currentPlayer = null;
@@ -214,6 +213,10 @@ function updatePlayerCounts(coordinates){
     else if(hasWon === false && totalMoves === 9){
         //display that the game was a tie
         displayMessage("There has been a tie!");
+
+        //update tie count and display on screen
+        ties++;
+        displayPlayerTally();
 
         //set currentPlayer to null so that the calling function will know that the game is over
         currentPlayer = null;
@@ -292,12 +295,17 @@ function updatePlayerCounts(coordinates){
     newGame();
 
     //since we are resetting all rounds we need to update player tallies/tie to 0
-    p1_tally = 0;
-    p2_tally = 0;
+    player1.wins = 0;
+    player2.wins = 0;
     ties = 0;
 
     //update tally on screen ==> CALL FUNCTION
+    displayPlayerTally();
  }
+
+ //add event listener to reset button
+ let resetBtn = document.querySelector('#reset-btn');
+ resetBtn.addEventListener('click', reset);
 
  /**
   * Clear Player counts
@@ -339,6 +347,19 @@ function updatePlayerCounts(coordinates){
  * -this method will update the player tallies on the screen
  */
 
+ function displayPlayerTally(){
+     let p1Score = document.querySelector('#p1-tally');
+     let p2Score = document.querySelector('#p2-tally');
+     let tie = document.querySelector('#ties');
+
+     console.log(`${player1.name}: ${player1.wins}`);
+     console.log(`${player2.name}: ${player2.wins}`);
+
+     p1Score.innerText = `${player1.name}: ${player1.wins}`;
+     p2Score.innerText = `${player2.name}: ${player2.wins}`;
+     tie.innerText = `Ties: ${ties}`;
+     
+ }
 
 
  // ===================================================================
@@ -368,6 +389,8 @@ function updatePlayerCounts(coordinates){
     document.querySelector('#tally-keeper').style.display = "flex";
 
     init();
+
+    displayPlayerTally();
  }
 
  let startGameBtn = document.querySelector('#start-game');

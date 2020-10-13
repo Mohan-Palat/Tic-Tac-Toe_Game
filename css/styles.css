@@ -18,6 +18,9 @@ footer {
     background-color: black;
     text-align: center;
 }
+p {
+    color: white;
+}
 main {
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -79,7 +82,8 @@ main {
 #tally-keeper{
     display: flex;
     flex-direction: column;
-    color: white;
+    text-align: center;
+    /* color: white; */
 }
 #control-center {
     display: flex;
