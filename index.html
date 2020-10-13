@@ -52,25 +52,35 @@
         </div>
         <!-- GAME PAGE -->
         <div id="game-page">
-            <p>Main Section</p>
-            <div id="tic-tac-toe-grid">
-                <div class="row row-1">
-                    <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="1"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="2"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="3"></div>
+            <div id="tally-keeper">
+                <div> Player 1: </div>
+                <div> Player 2: </div>
+                <div> Ties: </div>
+            </div>   
+            <div id="main-board">
+                <p>Main Section</p>
+                <div id="tic-tac-toe-grid">
+                    <div class="row row-1">
+                        <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="1"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="2"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="1" data-col="3"></div>
+                    </div>
+                    <div class="row row-2">
+                        <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="1"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="2"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="3"></div>
+                    </div>
+                    <div class="row row-3">
+                        <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="1"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="2"></div>
+                        <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="3"></div>
+                    </div>
                 </div>
-                <div class="row row-2">
-                    <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="1"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="2"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="2" data-col="3"></div>
-                </div>
-                <div class="row row-3">
-                    <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="1"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="2"></div>
-                    <div class="tile blurred-box" data-clicked="false" data-row="3" data-col="3"></div>
-                </div>
+                <button id="new-game-btn"> New Game! </button>
             </div>
-            <button id="new-game-btn"> New Game! </button>
+            <div id="control-center">
+                
+            </div>
         </div>
     </main>
     <footer>

@@ -32,10 +32,14 @@ class Player {
  let currentPlayer = null;
  let otherPlayer = null;
  let totalMoves = 0;
-//  let player1 = new Player('Rachel', 'images/hamburger.png');
-//  let player2 = new Player('Angeline', 'images/upside-down-face.png');
  let player1 = null;
  let player2 = null;
+
+ //to keep track of multiple rounds
+ let p1_tally = 0;
+ let p2_tally = 0;
+ let ties = 0;
+
 
  /**
   * Init Function
@@ -100,6 +104,9 @@ class Player {
             //mark all tiles with clicked = "true" so that no more moves
             //can be made on the board, since the game has ended
             setAllTilesToClicked();
+
+            //update tally on screen
+
         }
     }
     
@@ -235,7 +242,7 @@ function updatePlayerCounts(coordinates){
  * -this method will display the winner/who's turn it is/tie  
  */
  function displayMessage(string){
-     let messageBoard = document.querySelector('main p');
+     let messageBoard = document.querySelector('#main-board p');
      messageBoard.innerText = string;
  }
 
@@ -244,6 +251,7 @@ function updatePlayerCounts(coordinates){
  * -this method will reset the board for a new game
  * -clear player counts
  * -set totalMoves back to 0
+ * -resetting the whole game
  */
 
  function newGame(){
@@ -272,6 +280,24 @@ function updatePlayerCounts(coordinates){
  //add event listener to button
  let newGameBtn = document.querySelector('#new-game-btn');
  newGameBtn.addEventListener('click', newGame);
+
+ /**
+  * Reset Game
+  * -does everything newGame() does, except this also clears the tallies
+  */
+ function reset(){
+
+    //need to reset game board
+    //the newGame() function already does this, so I will call this function
+    newGame();
+
+    //since we are resetting all rounds we need to update player tallies/tie to 0
+    p1_tally = 0;
+    p2_tally = 0;
+    ties = 0;
+
+    //update tally on screen ==> CALL FUNCTION
+ }
 
  /**
   * Clear Player counts
@@ -308,6 +334,13 @@ function updatePlayerCounts(coordinates){
     });
  }
 
+/**
+ * Update Player tally on screen
+ * -this method will update the player tallies on the screen
+ */
+
+
+
  // ===================================================================
  /**
   * WELCOME PAGE FUNCTIONALITY
@@ -327,9 +360,12 @@ function updatePlayerCounts(coordinates){
     player1 = new Player(player1name, p1_token);
     player2 = new Player(player2name, p2_token);
 
+
     //change HTML content
     document.querySelector('#welcome-page').style.display = "none";
     document.querySelector('#game-page').style.display = "flex";
+    document.querySelector('#main-board').style.display = "flex";
+    document.querySelector('#tally-keeper').style.display = "flex";
 
     init();
  }
