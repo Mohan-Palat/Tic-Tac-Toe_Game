@@ -32,8 +32,10 @@ class Player {
  let currentPlayer = null;
  let otherPlayer = null;
  let totalMoves = 0;
- let player1 = new Player('Rachel', 'images/hamburger.png');
- let player2 = new Player('Angeline', 'images/upside-down-face.png');
+//  let player1 = new Player('Rachel', 'images/hamburger.png');
+//  let player2 = new Player('Angeline', 'images/upside-down-face.png');
+ let player1 = null;
+ let player2 = null;
 
  /**
   * Init Function
@@ -49,7 +51,7 @@ class Player {
     displayMessage(`${currentPlayer.name} you're up!`)
  }
 
- document.addEventListener('DOMContentLoaded', init);
+//  document.addEventListener('DOMContentLoaded', init);
 
 /**
  * Event listener
@@ -307,4 +309,30 @@ function updatePlayerCounts(coordinates){
  }
 
  // ===================================================================
- 
+ /**
+  * WELCOME PAGE FUNCTIONALITY
+  */
+ function setPlayers(){
+    //get selected player icons
+    const p1_options = document.querySelector('#p1_options');
+    let p1_token = p1_options.value;
+
+    const p2_options = document.querySelector('#p2_options');
+    let p2_token = p2_options.value;
+
+    //get player names
+    let player1name = document.querySelector('#p1_name').value;
+    let player2name = document.querySelector('#p2_name').value;
+
+    player1 = new Player(player1name, p1_token);
+    player2 = new Player(player2name, p2_token);
+
+    //change HTML content
+    document.querySelector('#welcome-page').style.display = "none";
+    document.querySelector('#game-page').style.display = "flex";
+
+    init();
+ }
+
+ let startGameBtn = document.querySelector('#start-game');
+ startGameBtn.addEventListener('click', setPlayers);
