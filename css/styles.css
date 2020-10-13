@@ -5,10 +5,13 @@ html{
 body {
     display: flex;
     flex-direction: column;
+    font-family: 'Orbitron', sans-serif;
 }
 header {
-    height: 150px;
+    height: 125px;
     background-color: black;
+    /* display: flex;
+    flex-direction: column; */
 }
 footer {
     height: 45px;
@@ -22,7 +25,7 @@ main {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-image: url('https://cutewallpaper.org/21/wooden-background-hd/Light-Wood-Wallpapers-HD-PixelsTalk.Net.jpg');
+    background-image: url('https://media.wired.com/photos/5e18ddec7b7b080008560e85/4:3/w_1726,h_1294,c_limit/photo_space_omega_1_PIA23409.jpg');
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +73,11 @@ main {
 h1 {
     color: white;
     text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    /* align-items: center;
+    justify-content: center; */
+    margin: 40px auto;
+    
 }
 h3 {
     color: white;
@@ -98,8 +106,17 @@ input {
 }
 select {
     padding: 7px;
+    border-radius: 4px;
 }
 label {
     color:black;
     text-align: center;
+    font-size: 16pt;
+}
+button {
+    font-family: inherit;
+    font-size: 1em;
+    padding: 10px;
+    border-color: inherit;
+    border-radius: 20px;
 }
